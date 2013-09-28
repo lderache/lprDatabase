@@ -97,7 +97,11 @@ namespace LprDatabase
             current_image.ROI = new Rectangle(0, 0, 640, 480);
         }
 
-
+        /// <summary>
+        /// Fill up the DataGrid with character value (Rectangle for position and char value)
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="idx"></param>
         private void fillDvg(Character r, int idx)
         {
             dataGridView1.Rows.Add();
