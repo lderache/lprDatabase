@@ -121,11 +121,20 @@ namespace LprDatabase
             
         }
         
+        /// <summary>
+        /// Display the rectangle around the license plate
+        /// </summary>
+        /// <param name="r"></param>
         private void showRectangle(Rectangle r)
         {
             current_image.Draw(r, new Bgr(0, 0, 255), 2);
         }
 
+        /// <summary>
+        /// Navigate to next image
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btNext_Click(object sender, EventArgs e)
         {
             
@@ -135,6 +144,11 @@ namespace LprDatabase
            
         }
 
+        /// <summary>
+        /// Navigate to previous image
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btPrev_Click(object sender, EventArgs e)
         {
             file_index--;
@@ -186,7 +200,11 @@ namespace LprDatabase
             } while (dataGridView1.Rows.Count > 0);
         }
 
-
+        /// <summary>
+        /// Show mouse point coordinate when moving hover the picture (adjusted to zoom value)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void imageBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (current_image != null)
@@ -218,6 +236,9 @@ namespace LprDatabase
             }
         }
 
+        /// <summary>
+        /// Draw character rectangle on the picture
+        /// </summary>
         private void drawCharRectangle()
         {
             Rectangle r = db.characters[selected_idx].rec;
@@ -239,6 +260,11 @@ namespace LprDatabase
             }
         }
 
+        /// <summary>
+        /// Pop up the context menu when right click happends on DataGrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {   
             if (e.Button == MouseButtons.Right && dataGridView1.Rows.Count > 0)
@@ -256,6 +282,12 @@ namespace LprDatabase
             }
         }
 
+        /// <summary>
+        /// Generic method to add row before/after in the DataGrid
+        /// </summary>
+        /// <param name="idx"></param>
+        /// <param name="idxOri"></param>
+        /// <param name="isBefore"></param>
         private void addRowAtIndex(int idx, int idxOri, bool isBefore)
         {
             // Compute new char parameters
@@ -303,6 +335,11 @@ namespace LprDatabase
             dataGridView1.Refresh();
         }
 
+        /// <summary>
+        /// Add before event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addRowBefore(object sender, EventArgs e)
         {
             foreach (DataGridViewRow r in dataGridView1.Rows)
@@ -322,6 +359,11 @@ namespace LprDatabase
             }
         }
 
+        /// <summary>
+        /// Add after event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addRowAfter(object sender, EventArgs e)
         {
             foreach (DataGridViewRow r in dataGridView1.Rows)
@@ -340,6 +382,11 @@ namespace LprDatabase
             }
         }
 
+        /// <summary>
+        /// Delete row event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteSelectedRow(object sender, EventArgs e)
         {
             foreach (DataGridViewRow r in dataGridView1.Rows)
@@ -365,6 +412,11 @@ namespace LprDatabase
            
         }
 
+        /// <summary>
+        /// Save picture event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btSave_Click(object sender, EventArgs e)
         {
             if (files != null)
@@ -377,6 +429,11 @@ namespace LprDatabase
             }
         }
 
+        /// <summary>
+        /// End edit on DataGrid event handler. Will update the data in memory
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             foreach (DataGridViewRow r in dataGridView1.Rows)
@@ -394,19 +451,12 @@ namespace LprDatabase
             }
         }
 
-        private DataGridViewRow getSelectedRow()
-        {
-            foreach (DataGridViewRow r in dataGridView1.Rows)
-            {
-                if (r.Selected)
-                {
-                    return r;
-                }
-            }
-
-            return null;
-        }
-
+        
+        /// <summary>
+        /// Make the rectangle larger on the character and change coordinates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbPlus_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow r in dataGridView1.Rows)
@@ -434,6 +484,11 @@ namespace LprDatabase
             }
         }
 
+        /// <summary>
+        /// Make the rectangle smaller on the character and change coordinates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbMinus_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow r in dataGridView1.Rows)
@@ -461,6 +516,11 @@ namespace LprDatabase
             }
         }
 
+        /// <summary>
+        /// Make the rectangle move left change coordinates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbLeft_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow r in dataGridView1.Rows)
@@ -488,6 +548,11 @@ namespace LprDatabase
             }
         }
 
+        /// <summary>
+        /// Make the rectangle move right change coordinates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbRight_Click(object sender, EventArgs e)
         {
             
@@ -516,7 +581,5 @@ namespace LprDatabase
             }
              
         }
-
-        
     }
 }
