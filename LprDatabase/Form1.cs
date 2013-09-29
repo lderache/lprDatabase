@@ -68,6 +68,8 @@ namespace LprDatabase
 
                 btNext.Enabled = true;
                 btPrev.Enabled = true;
+
+                lbNav.Text = (file_index + 1) + " / " + files.Count();
             }
         }
 
@@ -137,10 +139,21 @@ namespace LprDatabase
         /// <param name="e"></param>
         private void btNext_Click(object sender, EventArgs e)
         {
-            
+            // Save first
+            if (files != null)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Thread.Sleep(100);
+                string file = files[file_index].Split('.')[0] + ".data";
+                db.saveFile(file);
+                Cursor.Current = Cursors.Default;
+            }
+
             file_index++;
             displayImage();
             checkButtonState();
+
+            lbNav.Text = (file_index + 1) + " / " + files.Count();
            
         }
 
@@ -151,9 +164,21 @@ namespace LprDatabase
         /// <param name="e"></param>
         private void btPrev_Click(object sender, EventArgs e)
         {
+            // save first
+            if (files != null)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Thread.Sleep(100);
+                string file = files[file_index].Split('.')[0] + ".data";
+                db.saveFile(file);
+                Cursor.Current = Cursors.Default;
+            }
+            
             file_index--;
             displayImage();
             checkButtonState();
+
+            lbNav.Text = (file_index + 1) + " / " + files.Count();
         }
 
         /// <summary>

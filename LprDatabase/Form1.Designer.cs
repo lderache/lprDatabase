@@ -31,7 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.btSave = new System.Windows.Forms.Button();
+            this.lbRight = new System.Windows.Forms.Label();
+            this.lbLeft = new System.Windows.Forms.Label();
+            this.lbMinus = new System.Windows.Forms.Label();
+            this.lbPlus = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dvColImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.dvTop = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,10 +48,7 @@
             this.btOpen = new System.Windows.Forms.Button();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.lbPlus = new System.Windows.Forms.Label();
-            this.lbMinus = new System.Windows.Forms.Label();
-            this.lbLeft = new System.Windows.Forms.Label();
-            this.lbRight = new System.Windows.Forms.Label();
+            this.lbNav = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -74,6 +74,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lbNav);
             this.splitContainer1.Panel2.Controls.Add(this.imageBox1);
             this.splitContainer1.Size = new System.Drawing.Size(1239, 628);
             this.splitContainer1.SplitterDistance = 411;
@@ -93,7 +94,6 @@
             this.splitContainer2.Panel1.Controls.Add(this.lbLeft);
             this.splitContainer2.Panel1.Controls.Add(this.lbMinus);
             this.splitContainer2.Panel1.Controls.Add(this.lbPlus);
-            this.splitContainer2.Panel1.Controls.Add(this.btSave);
             this.splitContainer2.Panel1.Controls.Add(this.dataGridView1);
             // 
             // splitContainer2.Panel2
@@ -106,16 +106,49 @@
             this.splitContainer2.SplitterDistance = 448;
             this.splitContainer2.TabIndex = 0;
             // 
-            // btSave
+            // lbRight
             // 
-            this.btSave.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btSave.Location = new System.Drawing.Point(2, 389);
-            this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(404, 54);
-            this.btSave.TabIndex = 3;
-            this.btSave.Text = "SAVE FILE";
-            this.btSave.UseVisualStyleBackColor = false;
-            this.btSave.Click += new System.EventHandler(this.btSave_Click);
+            this.lbRight.AutoSize = true;
+            this.lbRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRight.Location = new System.Drawing.Point(282, 378);
+            this.lbRight.Name = "lbRight";
+            this.lbRight.Size = new System.Drawing.Size(38, 39);
+            this.lbRight.TabIndex = 7;
+            this.lbRight.Text = ">";
+            this.lbRight.Click += new System.EventHandler(this.lbRight_Click);
+            // 
+            // lbLeft
+            // 
+            this.lbLeft.AutoSize = true;
+            this.lbLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLeft.Location = new System.Drawing.Point(238, 378);
+            this.lbLeft.Name = "lbLeft";
+            this.lbLeft.Size = new System.Drawing.Size(38, 39);
+            this.lbLeft.TabIndex = 6;
+            this.lbLeft.Text = "<";
+            this.lbLeft.Click += new System.EventHandler(this.lbLeft_Click);
+            // 
+            // lbMinus
+            // 
+            this.lbMinus.AutoSize = true;
+            this.lbMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMinus.Location = new System.Drawing.Point(148, 375);
+            this.lbMinus.Name = "lbMinus";
+            this.lbMinus.Size = new System.Drawing.Size(30, 39);
+            this.lbMinus.TabIndex = 5;
+            this.lbMinus.Text = "-";
+            this.lbMinus.Click += new System.EventHandler(this.lbMinus_Click);
+            // 
+            // lbPlus
+            // 
+            this.lbPlus.AutoSize = true;
+            this.lbPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPlus.Location = new System.Drawing.Point(93, 378);
+            this.lbPlus.Name = "lbPlus";
+            this.lbPlus.Size = new System.Drawing.Size(38, 39);
+            this.lbPlus.TabIndex = 4;
+            this.lbPlus.Text = "+";
+            this.lbPlus.Click += new System.EventHandler(this.lbPlus_Click);
             // 
             // dataGridView1
             // 
@@ -228,49 +261,15 @@
             this.imageBox1.TabStop = false;
             this.imageBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageBox1_MouseMove);
             // 
-            // lbPlus
+            // lbNav
             // 
-            this.lbPlus.AutoSize = true;
-            this.lbPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPlus.Location = new System.Drawing.Point(91, 347);
-            this.lbPlus.Name = "lbPlus";
-            this.lbPlus.Size = new System.Drawing.Size(38, 39);
-            this.lbPlus.TabIndex = 4;
-            this.lbPlus.Text = "+";
-            this.lbPlus.Click += new System.EventHandler(this.lbPlus_Click);
-            // 
-            // lbMinus
-            // 
-            this.lbMinus.AutoSize = true;
-            this.lbMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMinus.Location = new System.Drawing.Point(146, 342);
-            this.lbMinus.Name = "lbMinus";
-            this.lbMinus.Size = new System.Drawing.Size(30, 39);
-            this.lbMinus.TabIndex = 5;
-            this.lbMinus.Text = "-";
-            this.lbMinus.Click += new System.EventHandler(this.lbMinus_Click);
-            // 
-            // lbLeft
-            // 
-            this.lbLeft.AutoSize = true;
-            this.lbLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLeft.Location = new System.Drawing.Point(236, 347);
-            this.lbLeft.Name = "lbLeft";
-            this.lbLeft.Size = new System.Drawing.Size(38, 39);
-            this.lbLeft.TabIndex = 6;
-            this.lbLeft.Text = "<";
-            this.lbLeft.Click += new System.EventHandler(this.lbLeft_Click);
-            // 
-            // lbRight
-            // 
-            this.lbRight.AutoSize = true;
-            this.lbRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRight.Location = new System.Drawing.Point(280, 347);
-            this.lbRight.Name = "lbRight";
-            this.lbRight.Size = new System.Drawing.Size(38, 39);
-            this.lbRight.TabIndex = 7;
-            this.lbRight.Text = ">";
-            this.lbRight.Click += new System.EventHandler(this.lbRight_Click);
+            this.lbNav.AutoSize = true;
+            this.lbNav.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNav.Location = new System.Drawing.Point(302, 581);
+            this.lbNav.Name = "lbNav";
+            this.lbNav.Size = new System.Drawing.Size(223, 37);
+            this.lbNav.TabIndex = 3;
+            this.lbNav.Text = "Current / Total";
             // 
             // Form1
             // 
@@ -315,11 +314,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dvRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn dvBottom;
         private System.Windows.Forms.DataGridViewTextBoxColumn dvCharValue;
-        private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.Label lbPlus;
         private System.Windows.Forms.Label lbMinus;
         private System.Windows.Forms.Label lbRight;
         private System.Windows.Forms.Label lbLeft;
+        private System.Windows.Forms.Label lbNav;
     }
 }
 
