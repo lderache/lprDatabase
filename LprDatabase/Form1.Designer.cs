@@ -46,9 +46,11 @@
             this.btNext = new System.Windows.Forms.Button();
             this.btPrev = new System.Windows.Forms.Button();
             this.btOpen = new System.Windows.Forms.Button();
+            this.lbNav = new System.Windows.Forms.Label();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.lbNav = new System.Windows.Forms.Label();
+            this.btDelete = new System.Windows.Forms.Button();
+            this.lbFileName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -74,6 +76,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lbFileName);
+            this.splitContainer1.Panel2.Controls.Add(this.btDelete);
             this.splitContainer1.Panel2.Controls.Add(this.lbNav);
             this.splitContainer1.Panel2.Controls.Add(this.imageBox1);
             this.splitContainer1.Size = new System.Drawing.Size(1239, 628);
@@ -250,6 +254,16 @@
             this.btOpen.UseVisualStyleBackColor = true;
             this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
             // 
+            // lbNav
+            // 
+            this.lbNav.AutoSize = true;
+            this.lbNav.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNav.Location = new System.Drawing.Point(227, 581);
+            this.lbNav.Name = "lbNav";
+            this.lbNav.Size = new System.Drawing.Size(223, 37);
+            this.lbNav.TabIndex = 3;
+            this.lbNav.Text = "Current / Total";
+            // 
             // imageBox1
             // 
             this.imageBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -261,15 +275,25 @@
             this.imageBox1.TabStop = false;
             this.imageBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageBox1_MouseMove);
             // 
-            // lbNav
+            // btDelete
             // 
-            this.lbNav.AutoSize = true;
-            this.lbNav.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNav.Location = new System.Drawing.Point(302, 581);
-            this.lbNav.Name = "lbNav";
-            this.lbNav.Size = new System.Drawing.Size(223, 37);
-            this.lbNav.TabIndex = 3;
-            this.lbNav.Text = "Current / Total";
+            this.btDelete.Location = new System.Drawing.Point(50, 581);
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(139, 34);
+            this.btDelete.TabIndex = 3;
+            this.btDelete.Text = "Delete";
+            this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            // 
+            // lbFileName
+            // 
+            this.lbFileName.AutoSize = true;
+            this.lbFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFileName.Location = new System.Drawing.Point(500, 594);
+            this.lbFileName.Name = "lbFileName";
+            this.lbFileName.Size = new System.Drawing.Size(74, 20);
+            this.lbFileName.TabIndex = 4;
+            this.lbFileName.Text = "Filename";
             // 
             // Form1
             // 
@@ -319,6 +343,8 @@
         private System.Windows.Forms.Label lbRight;
         private System.Windows.Forms.Label lbLeft;
         private System.Windows.Forms.Label lbNav;
+        private System.Windows.Forms.Button btDelete;
+        private System.Windows.Forms.Label lbFileName;
     }
 }
 
