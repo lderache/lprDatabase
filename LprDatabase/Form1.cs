@@ -70,6 +70,7 @@ namespace LprDatabase
                 btPrev.Enabled = true;
 
                 lbNav.Text = (file_index + 1) + " / " + files.Count();
+                lbFileName.Text = files[file_index];
             }
         }
 
@@ -154,6 +155,8 @@ namespace LprDatabase
             checkButtonState();
 
             lbNav.Text = (file_index + 1) + " / " + files.Count();
+
+            lbFileName.Text = files[file_index];
            
         }
 
@@ -179,6 +182,7 @@ namespace LprDatabase
             checkButtonState();
 
             lbNav.Text = (file_index + 1) + " / " + files.Count();
+            lbFileName.Text = files[file_index];
         }
 
         /// <summary>
@@ -605,6 +609,31 @@ namespace LprDatabase
 
             }
              
+        }
+
+        private void btDelete_Click(object sender, EventArgs e)
+        {
+            // Save file info first
+            int sav_index = file_index;
+            string data_file = files[sav_index].Split('.')[0] + ".data";
+            string jpeg_file = files[sav_index];
+
+            // Go to next
+            //btNext_Click(null,null);
+
+            File.Delete(jpeg_file);
+            File.Delete(data_file);
+
+            // dirty array list. Should i use list from begining, probably...
+            var files_list = new List<string>(files);
+            files_list.RemoveAt(sav_index);
+            files = files_list.ToArray();
+
+            displayImage();
+
+            lbNav.Text = (file_index + 1) + " / " + files.Count();
+            lbFileName.Text = files[file_index];
+
         }
     }
 }
