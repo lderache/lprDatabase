@@ -232,6 +232,7 @@ namespace LprDatabase
         {
             db.plate = getPlateRectangle();
 
+
             // save first
             if (files != null)
             {
