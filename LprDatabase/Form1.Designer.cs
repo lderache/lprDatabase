@@ -46,11 +46,18 @@
             this.btNext = new System.Windows.Forms.Button();
             this.btPrev = new System.Windows.Forms.Button();
             this.btOpen = new System.Windows.Forms.Button();
+            this.lbHeight = new System.Windows.Forms.Label();
+            this.lbRatio = new System.Windows.Forms.Label();
+            this.lbFileName = new System.Windows.Forms.Label();
+            this.btDelete = new System.Windows.Forms.Button();
             this.lbNav = new System.Windows.Forms.Label();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.btDelete = new System.Windows.Forms.Button();
-            this.lbFileName = new System.Windows.Forms.Label();
+            this.tbpTop = new System.Windows.Forms.TextBox();
+            this.tbpLeft = new System.Windows.Forms.TextBox();
+            this.tbpRight = new System.Windows.Forms.TextBox();
+            this.tbpBottom = new System.Windows.Forms.TextBox();
+            this.btRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -76,6 +83,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lbHeight);
+            this.splitContainer1.Panel2.Controls.Add(this.lbRatio);
             this.splitContainer1.Panel2.Controls.Add(this.lbFileName);
             this.splitContainer1.Panel2.Controls.Add(this.btDelete);
             this.splitContainer1.Panel2.Controls.Add(this.lbNav);
@@ -94,6 +103,10 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.tbpBottom);
+            this.splitContainer2.Panel1.Controls.Add(this.tbpRight);
+            this.splitContainer2.Panel1.Controls.Add(this.tbpLeft);
+            this.splitContainer2.Panel1.Controls.Add(this.tbpTop);
             this.splitContainer2.Panel1.Controls.Add(this.lbRight);
             this.splitContainer2.Panel1.Controls.Add(this.lbLeft);
             this.splitContainer2.Panel1.Controls.Add(this.lbMinus);
@@ -102,6 +115,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.btRefresh);
             this.splitContainer2.Panel2.Controls.Add(this.lbMouse);
             this.splitContainer2.Panel2.Controls.Add(this.btNext);
             this.splitContainer2.Panel2.Controls.Add(this.btPrev);
@@ -114,7 +128,7 @@
             // 
             this.lbRight.AutoSize = true;
             this.lbRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRight.Location = new System.Drawing.Point(282, 378);
+            this.lbRight.Location = new System.Drawing.Point(275, 398);
             this.lbRight.Name = "lbRight";
             this.lbRight.Size = new System.Drawing.Size(38, 39);
             this.lbRight.TabIndex = 7;
@@ -125,7 +139,7 @@
             // 
             this.lbLeft.AutoSize = true;
             this.lbLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLeft.Location = new System.Drawing.Point(238, 378);
+            this.lbLeft.Location = new System.Drawing.Point(231, 398);
             this.lbLeft.Name = "lbLeft";
             this.lbLeft.Size = new System.Drawing.Size(38, 39);
             this.lbLeft.TabIndex = 6;
@@ -136,7 +150,7 @@
             // 
             this.lbMinus.AutoSize = true;
             this.lbMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMinus.Location = new System.Drawing.Point(148, 375);
+            this.lbMinus.Location = new System.Drawing.Point(141, 395);
             this.lbMinus.Name = "lbMinus";
             this.lbMinus.Size = new System.Drawing.Size(30, 39);
             this.lbMinus.TabIndex = 5;
@@ -147,7 +161,7 @@
             // 
             this.lbPlus.AutoSize = true;
             this.lbPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPlus.Location = new System.Drawing.Point(93, 378);
+            this.lbPlus.Location = new System.Drawing.Point(86, 398);
             this.lbPlus.Name = "lbPlus";
             this.lbPlus.Size = new System.Drawing.Size(38, 39);
             this.lbPlus.TabIndex = 4;
@@ -254,11 +268,51 @@
             this.btOpen.UseVisualStyleBackColor = true;
             this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
             // 
+            // lbHeight
+            // 
+            this.lbHeight.AutoSize = true;
+            this.lbHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHeight.Location = new System.Drawing.Point(18, 516);
+            this.lbHeight.Name = "lbHeight";
+            this.lbHeight.Size = new System.Drawing.Size(56, 20);
+            this.lbHeight.TabIndex = 6;
+            this.lbHeight.Text = "Height";
+            // 
+            // lbRatio
+            // 
+            this.lbRatio.AutoSize = true;
+            this.lbRatio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRatio.Location = new System.Drawing.Point(18, 550);
+            this.lbRatio.Name = "lbRatio";
+            this.lbRatio.Size = new System.Drawing.Size(47, 20);
+            this.lbRatio.TabIndex = 5;
+            this.lbRatio.Text = "Ratio";
+            // 
+            // lbFileName
+            // 
+            this.lbFileName.AutoSize = true;
+            this.lbFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFileName.Location = new System.Drawing.Point(432, 594);
+            this.lbFileName.Name = "lbFileName";
+            this.lbFileName.Size = new System.Drawing.Size(74, 20);
+            this.lbFileName.TabIndex = 4;
+            this.lbFileName.Text = "Filename";
+            // 
+            // btDelete
+            // 
+            this.btDelete.Location = new System.Drawing.Point(13, 581);
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(139, 34);
+            this.btDelete.TabIndex = 3;
+            this.btDelete.Text = "Delete";
+            this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            // 
             // lbNav
             // 
             this.lbNav.AutoSize = true;
             this.lbNav.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNav.Location = new System.Drawing.Point(227, 581);
+            this.lbNav.Location = new System.Drawing.Point(172, 581);
             this.lbNav.Name = "lbNav";
             this.lbNav.Size = new System.Drawing.Size(223, 37);
             this.lbNav.TabIndex = 3;
@@ -275,25 +329,45 @@
             this.imageBox1.TabStop = false;
             this.imageBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageBox1_MouseMove);
             // 
-            // btDelete
+            // tbpTop
             // 
-            this.btDelete.Location = new System.Drawing.Point(50, 581);
-            this.btDelete.Name = "btDelete";
-            this.btDelete.Size = new System.Drawing.Size(139, 34);
-            this.btDelete.TabIndex = 3;
-            this.btDelete.Text = "Delete";
-            this.btDelete.UseVisualStyleBackColor = true;
-            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            this.tbpTop.Location = new System.Drawing.Point(97, 355);
+            this.tbpTop.Name = "tbpTop";
+            this.tbpTop.Size = new System.Drawing.Size(32, 20);
+            this.tbpTop.TabIndex = 8;
+            this.tbpTop.TextChanged += new System.EventHandler(this.tbpTop_TextChanged);
             // 
-            // lbFileName
+            // tbpLeft
             // 
-            this.lbFileName.AutoSize = true;
-            this.lbFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFileName.Location = new System.Drawing.Point(500, 594);
-            this.lbFileName.Name = "lbFileName";
-            this.lbFileName.Size = new System.Drawing.Size(74, 20);
-            this.lbFileName.TabIndex = 4;
-            this.lbFileName.Text = "Filename";
+            this.tbpLeft.Location = new System.Drawing.Point(153, 355);
+            this.tbpLeft.Name = "tbpLeft";
+            this.tbpLeft.Size = new System.Drawing.Size(32, 20);
+            this.tbpLeft.TabIndex = 9;
+            // 
+            // tbpRight
+            // 
+            this.tbpRight.Location = new System.Drawing.Point(204, 355);
+            this.tbpRight.Name = "tbpRight";
+            this.tbpRight.Size = new System.Drawing.Size(32, 20);
+            this.tbpRight.TabIndex = 10;
+            // 
+            // tbpBottom
+            // 
+            this.tbpBottom.Location = new System.Drawing.Point(256, 355);
+            this.tbpBottom.Name = "tbpBottom";
+            this.tbpBottom.Size = new System.Drawing.Size(32, 20);
+            this.tbpBottom.TabIndex = 11;
+            // 
+            // btRefresh
+            // 
+            this.btRefresh.BackColor = System.Drawing.Color.AliceBlue;
+            this.btRefresh.Location = new System.Drawing.Point(85, 139);
+            this.btRefresh.Name = "btRefresh";
+            this.btRefresh.Size = new System.Drawing.Size(223, 32);
+            this.btRefresh.TabIndex = 3;
+            this.btRefresh.Text = "Refresh";
+            this.btRefresh.UseVisualStyleBackColor = false;
+            this.btRefresh.Click += new System.EventHandler(this.btRefresh_Click);
             // 
             // Form1
             // 
@@ -345,6 +419,13 @@
         private System.Windows.Forms.Label lbNav;
         private System.Windows.Forms.Button btDelete;
         private System.Windows.Forms.Label lbFileName;
+        private System.Windows.Forms.Label lbRatio;
+        private System.Windows.Forms.Label lbHeight;
+        private System.Windows.Forms.TextBox tbpBottom;
+        private System.Windows.Forms.TextBox tbpRight;
+        private System.Windows.Forms.TextBox tbpLeft;
+        private System.Windows.Forms.TextBox tbpTop;
+        private System.Windows.Forms.Button btRefresh;
     }
 }
 

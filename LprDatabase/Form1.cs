@@ -90,14 +90,69 @@ namespace LprDatabase
             string dataFile = files[file_index].Split('.')[0] + ".data";
             db.parseFile(dataFile);
 
-            current_image.Draw(db.plate, new Bgr(0, 0, 255), 2);
+            // plate rectangle data
+            tbpTop.Text = db.plate.Top.ToString();
+            tbpLeft.Text = db.plate.Left.ToString();
+            tbpRight.Text = db.plate.Right.ToString();
+            tbpBottom.Text = db.plate.Bottom.ToString();
+
+
+            double plRatio = (double)db.plate.Width / db.plate.Height;
+            lbRatio.Text = (plRatio).ToString();
+
+            if (plRatio < 2 || plRatio > 8)
+            {
+                drawPlateRectangle(new Bgr(0, 0, 255));
+            }
+            else
+            {
+                drawPlateRectangle(new Bgr(0, 255, 0));
+            }
+
+            lbHeight.Text = db.plate.Height.ToString();
+
 
             for (int c = 0; c < db.characters.Count(); c++)
             {
                 fillDvg(db.characters[c], c);
             }
 
+            //db = null;
+
             current_image.ROI = new Rectangle(0, 0, 640, 480);
+        }
+
+
+        private bool isPlateDataOk()
+        {
+            if (tbpTop.Text.Equals("")
+                || tbpRight.Text.Equals("")
+                || tbpLeft.Text.Equals("")
+                || tbpBottom.Text.Equals(""))
+                return false;
+
+            return true;
+            
+        }
+
+        private Rectangle getPlateRectangle()
+        {
+            if (isPlateDataOk())
+            {
+                int x = int.Parse(tbpLeft.Text);
+                int y = int.Parse(tbpTop.Text);
+                int width = int.Parse(tbpRight.Text) - int.Parse(tbpLeft.Text);
+                int height = int.Parse(tbpBottom.Text) - int.Parse(tbpTop.Text);
+
+                return new Rectangle(x, y, width, height);
+            }
+
+            return new Rectangle();
+        }
+
+        private void drawPlateRectangle(Bgr color)
+        {
+            current_image.Draw(getPlateRectangle(), color, 2);      
         }
 
         /// <summary>
@@ -128,10 +183,10 @@ namespace LprDatabase
         /// Display the rectangle around the license plate
         /// </summary>
         /// <param name="r"></param>
-        private void showRectangle(Rectangle r)
+        /*private void showRectangle(Rectangle r)
         {
             current_image.Draw(r, new Bgr(0, 0, 255), 2);
-        }
+        }*/
 
         /// <summary>
         /// Navigate to next image
@@ -140,6 +195,8 @@ namespace LprDatabase
         /// <param name="e"></param>
         private void btNext_Click(object sender, EventArgs e)
         {
+            db.plate = getPlateRectangle();
+
             // Save first
             if (files != null)
             {
@@ -148,6 +205,9 @@ namespace LprDatabase
                 string file = files[file_index].Split('.')[0] + ".data";
                 db.saveFile(file);
                 Cursor.Current = Cursors.Default;
+
+                //db = null;
+                //db = new DbParser();
             }
 
             file_index++;
@@ -157,6 +217,9 @@ namespace LprDatabase
             lbNav.Text = (file_index + 1) + " / " + files.Count();
 
             lbFileName.Text = files[file_index];
+
+            // Force for Mono...
+            dataGridView1_CellMouseClick(null, null);
            
         }
 
@@ -167,6 +230,8 @@ namespace LprDatabase
         /// <param name="e"></param>
         private void btPrev_Click(object sender, EventArgs e)
         {
+            db.plate = getPlateRectangle();
+
             // save first
             if (files != null)
             {
@@ -175,6 +240,10 @@ namespace LprDatabase
                 string file = files[file_index].Split('.')[0] + ".data";
                 db.saveFile(file);
                 Cursor.Current = Cursors.Default;
+
+                //db = null;
+                //db = new DbParser();
+
             }
             
             file_index--;
@@ -183,6 +252,9 @@ namespace LprDatabase
 
             lbNav.Text = (file_index + 1) + " / " + files.Count();
             lbFileName.Text = files[file_index];
+
+            // Force for Mono...
+            dataGridView1_CellMouseClick(null, null);
         }
 
         /// <summary>
@@ -216,17 +288,13 @@ namespace LprDatabase
         /// </summary>
         private void clearDgv()
         {
-            do
-            {
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-                    try
-                    {
-                        dataGridView1.Rows.Remove(row);
-                    }
-                    catch (Exception) { }
-                }
-            } while (dataGridView1.Rows.Count > 0);
+            int dvCount = dataGridView1.Rows.Count;
+
+            // just set the count to zero to clear the dgv 
+            // (iterating through the rows raise exception under mono
+            // system.invalidoperationexception list has changed)
+            dataGridView1.RowCount = 0;
+           
         }
 
         /// <summary>
@@ -259,9 +327,20 @@ namespace LprDatabase
         {
             if (current_image != null)
             {
-                selected_idx = e.RowIndex;
-                if(selected_idx != -1)
-                    drawCharRectangle();
+                if (e == null)
+                {
+                    if (dataGridView1.Rows.Count > 0) // only if the dgv contains data
+                    {
+                        selected_idx = 0;
+                        drawCharRectangle();
+                    }
+                }
+                else
+                {
+                    selected_idx = e.RowIndex;
+                    if (selected_idx != -1)
+                        drawCharRectangle();
+                }
             }
         }
 
@@ -371,6 +450,24 @@ namespace LprDatabase
         /// <param name="e"></param>
         private void addRowBefore(object sender, EventArgs e)
         {
+            int dgvCount = dataGridView1.Rows.Count;
+            for (int i = 0; i < dgvCount; i++)
+            {
+                DataGridViewRow r = dataGridView1.Rows[i];
+                if (r.Selected)
+                {
+                    Console.WriteLine("insert new row at index: " + r.Index);
+
+                    // force unselect to avoid infinite loop
+                    r.Selected = false;
+
+                    int idx = r.Index; // insert after
+
+                    addRowAtIndex(r.Index, r.Index, true);
+                }
+            }
+
+            /*
             foreach (DataGridViewRow r in dataGridView1.Rows)
             {
                 if (r.Selected)
@@ -386,6 +483,7 @@ namespace LprDatabase
                     
                 }
             }
+             */
         }
 
         /// <summary>
@@ -395,6 +493,24 @@ namespace LprDatabase
         /// <param name="e"></param>
         private void addRowAfter(object sender, EventArgs e)
         {
+            int dgvCount = dataGridView1.Rows.Count;
+            for (int i = 0; i < dgvCount; i++)
+            {
+                DataGridViewRow r = dataGridView1.Rows[i];
+                if (r.Selected)
+                {
+                    Console.WriteLine("insert new row at index: " + r.Index);
+
+                    // force unselect to avoid infinite loop
+                    r.Selected = false;
+
+                    int idx = r.Index + 1; // insert after
+
+                    addRowAtIndex(r.Index + 1, r.Index, false);
+                }
+            }
+
+            /* Bug on Mono
             foreach (DataGridViewRow r in dataGridView1.Rows)
             {
                 if (r.Selected)
@@ -409,6 +525,7 @@ namespace LprDatabase
                     addRowAtIndex(r.Index + 1, r.Index, false);
                 }
             }
+             */
         }
 
         /// <summary>
@@ -418,6 +535,25 @@ namespace LprDatabase
         /// <param name="e"></param>
         private void deleteSelectedRow(object sender, EventArgs e)
         {
+            int dgvCount = dataGridView1.Rows.Count;
+            for (int i = 0; i < dgvCount; i++)
+            {
+                DataGridViewRow r = dataGridView1.Rows[i];
+                if (r.Selected)
+                {
+                    int index = r.Index;
+                    dataGridView1.Rows.Remove(r);
+                    Console.WriteLine("delete row index: " + index);
+                    dataGridView1.Refresh();
+
+                    // Also delete associated character 
+                    Character rec = db.characters.ElementAt(index);
+                    db.characters.Remove(rec);
+                    return;
+
+                }
+            }
+            /*
             foreach (DataGridViewRow r in dataGridView1.Rows)
             {
                 if (r.Selected)
@@ -433,6 +569,7 @@ namespace LprDatabase
                     
                 }
             }
+             */
         }
 
        
@@ -634,6 +771,30 @@ namespace LprDatabase
             lbNav.Text = (file_index + 1) + " / " + files.Count();
             lbFileName.Text = files[file_index];
 
+        }
+
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            db.plate = getPlateRectangle();
+
+            // Save first
+            if (files != null)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Thread.Sleep(100);
+                string file = files[file_index].Split('.')[0] + ".data";
+                db.saveFile(file);
+                Cursor.Current = Cursors.Default;
+
+            }
+
+            displayImage();
+        }
+
+        private void tbpTop_TextChanged(object sender, EventArgs e)
+        {
+            
+            
         }
     }
 }
