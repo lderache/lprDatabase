@@ -201,7 +201,7 @@ namespace LprDatabase
             if (files != null)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                Thread.Sleep(100);
+                //Thread.Sleep(100);
                 string file = files[file_index].Split('.')[0] + ".data";
                 db.saveFile(file);
                 Cursor.Current = Cursors.Default;
@@ -796,6 +796,60 @@ namespace LprDatabase
         {
             
             
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow r in dataGridView1.Rows)
+            {
+                if (r.Selected)
+                {
+                    r.Cells[1].Value = (int)r.Cells[1].Value - 1;
+                    r.Cells[4].Value = (int)r.Cells[4].Value - 1;
+
+                    int x = int.Parse(r.Cells[2].Value.ToString());
+                    int y = int.Parse(r.Cells[1].Value.ToString());
+
+                    int width = int.Parse(r.Cells[3].Value.ToString()) - int.Parse(r.Cells[2].Value.ToString());
+                    int height = int.Parse(r.Cells[4].Value.ToString()) - int.Parse(r.Cells[1].Value.ToString());
+
+                    //width += 10;
+                    db.characters[r.Index].val = char.Parse(r.Cells[5].Value.ToString());
+                    db.characters[r.Index].rec = new Rectangle(
+                        x, y, width, height);
+
+                    // redraw the rectangle
+                    drawCharRectangle();
+                }
+
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow r in dataGridView1.Rows)
+            {
+                if (r.Selected)
+                {
+                    r.Cells[1].Value = (int)r.Cells[1].Value + 1;
+                    r.Cells[4].Value = (int)r.Cells[4].Value + 1;
+
+                    int x = int.Parse(r.Cells[2].Value.ToString());
+                    int y = int.Parse(r.Cells[1].Value.ToString());
+
+                    int width = int.Parse(r.Cells[3].Value.ToString()) - int.Parse(r.Cells[2].Value.ToString());
+                    int height = int.Parse(r.Cells[4].Value.ToString()) - int.Parse(r.Cells[1].Value.ToString());
+
+                    //width += 10;
+                    db.characters[r.Index].val = char.Parse(r.Cells[5].Value.ToString());
+                    db.characters[r.Index].rec = new Rectangle(
+                        x, y, width, height);
+
+                    // redraw the rectangle
+                    drawCharRectangle();
+                }
+
+            }
         }
     }
 }

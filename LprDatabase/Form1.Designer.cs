@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.tbpBottom = new System.Windows.Forms.TextBox();
+            this.tbpRight = new System.Windows.Forms.TextBox();
+            this.tbpLeft = new System.Windows.Forms.TextBox();
+            this.tbpTop = new System.Windows.Forms.TextBox();
             this.lbRight = new System.Windows.Forms.Label();
             this.lbLeft = new System.Windows.Forms.Label();
             this.lbMinus = new System.Windows.Forms.Label();
@@ -42,6 +46,7 @@
             this.dvRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dvBottom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dvCharValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btRefresh = new System.Windows.Forms.Button();
             this.lbMouse = new System.Windows.Forms.Label();
             this.btNext = new System.Windows.Forms.Button();
             this.btPrev = new System.Windows.Forms.Button();
@@ -53,11 +58,8 @@
             this.lbNav = new System.Windows.Forms.Label();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.tbpTop = new System.Windows.Forms.TextBox();
-            this.tbpLeft = new System.Windows.Forms.TextBox();
-            this.tbpRight = new System.Windows.Forms.TextBox();
-            this.tbpBottom = new System.Windows.Forms.TextBox();
-            this.btRefresh = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -103,6 +105,8 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.label2);
+            this.splitContainer2.Panel1.Controls.Add(this.label1);
             this.splitContainer2.Panel1.Controls.Add(this.tbpBottom);
             this.splitContainer2.Panel1.Controls.Add(this.tbpRight);
             this.splitContainer2.Panel1.Controls.Add(this.tbpLeft);
@@ -124,11 +128,40 @@
             this.splitContainer2.SplitterDistance = 448;
             this.splitContainer2.TabIndex = 0;
             // 
+            // tbpBottom
+            // 
+            this.tbpBottom.Location = new System.Drawing.Point(174, 355);
+            this.tbpBottom.Name = "tbpBottom";
+            this.tbpBottom.Size = new System.Drawing.Size(32, 20);
+            this.tbpBottom.TabIndex = 11;
+            // 
+            // tbpRight
+            // 
+            this.tbpRight.Location = new System.Drawing.Point(122, 355);
+            this.tbpRight.Name = "tbpRight";
+            this.tbpRight.Size = new System.Drawing.Size(32, 20);
+            this.tbpRight.TabIndex = 10;
+            // 
+            // tbpLeft
+            // 
+            this.tbpLeft.Location = new System.Drawing.Point(71, 355);
+            this.tbpLeft.Name = "tbpLeft";
+            this.tbpLeft.Size = new System.Drawing.Size(32, 20);
+            this.tbpLeft.TabIndex = 9;
+            // 
+            // tbpTop
+            // 
+            this.tbpTop.Location = new System.Drawing.Point(15, 355);
+            this.tbpTop.Name = "tbpTop";
+            this.tbpTop.Size = new System.Drawing.Size(32, 20);
+            this.tbpTop.TabIndex = 8;
+            this.tbpTop.TextChanged += new System.EventHandler(this.tbpTop_TextChanged);
+            // 
             // lbRight
             // 
             this.lbRight.AutoSize = true;
             this.lbRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRight.Location = new System.Drawing.Point(275, 398);
+            this.lbRight.Location = new System.Drawing.Point(351, 370);
             this.lbRight.Name = "lbRight";
             this.lbRight.Size = new System.Drawing.Size(38, 39);
             this.lbRight.TabIndex = 7;
@@ -139,7 +172,7 @@
             // 
             this.lbLeft.AutoSize = true;
             this.lbLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLeft.Location = new System.Drawing.Point(231, 398);
+            this.lbLeft.Location = new System.Drawing.Point(231, 370);
             this.lbLeft.Name = "lbLeft";
             this.lbLeft.Size = new System.Drawing.Size(38, 39);
             this.lbLeft.TabIndex = 6;
@@ -150,7 +183,7 @@
             // 
             this.lbMinus.AutoSize = true;
             this.lbMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMinus.Location = new System.Drawing.Point(141, 395);
+            this.lbMinus.Location = new System.Drawing.Point(120, 395);
             this.lbMinus.Name = "lbMinus";
             this.lbMinus.Size = new System.Drawing.Size(30, 39);
             this.lbMinus.TabIndex = 5;
@@ -161,7 +194,7 @@
             // 
             this.lbPlus.AutoSize = true;
             this.lbPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPlus.Location = new System.Drawing.Point(86, 398);
+            this.lbPlus.Location = new System.Drawing.Point(65, 398);
             this.lbPlus.Name = "lbPlus";
             this.lbPlus.Size = new System.Drawing.Size(38, 39);
             this.lbPlus.TabIndex = 4;
@@ -226,6 +259,17 @@
             this.dvCharValue.HeaderText = "Char value";
             this.dvCharValue.Name = "dvCharValue";
             this.dvCharValue.Width = 50;
+            // 
+            // btRefresh
+            // 
+            this.btRefresh.BackColor = System.Drawing.Color.AliceBlue;
+            this.btRefresh.Location = new System.Drawing.Point(85, 139);
+            this.btRefresh.Name = "btRefresh";
+            this.btRefresh.Size = new System.Drawing.Size(223, 32);
+            this.btRefresh.TabIndex = 3;
+            this.btRefresh.Text = "Refresh";
+            this.btRefresh.UseVisualStyleBackColor = false;
+            this.btRefresh.Click += new System.EventHandler(this.btRefresh_Click);
             // 
             // lbMouse
             // 
@@ -329,45 +373,27 @@
             this.imageBox1.TabStop = false;
             this.imageBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageBox1_MouseMove);
             // 
-            // tbpTop
+            // label1
             // 
-            this.tbpTop.Location = new System.Drawing.Point(97, 355);
-            this.tbpTop.Name = "tbpTop";
-            this.tbpTop.Size = new System.Drawing.Size(32, 20);
-            this.tbpTop.TabIndex = 8;
-            this.tbpTop.TextChanged += new System.EventHandler(this.tbpTop_TextChanged);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(285, 355);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 33);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Up";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // tbpLeft
+            // label2
             // 
-            this.tbpLeft.Location = new System.Drawing.Point(153, 355);
-            this.tbpLeft.Name = "tbpLeft";
-            this.tbpLeft.Size = new System.Drawing.Size(32, 20);
-            this.tbpLeft.TabIndex = 9;
-            // 
-            // tbpRight
-            // 
-            this.tbpRight.Location = new System.Drawing.Point(204, 355);
-            this.tbpRight.Name = "tbpRight";
-            this.tbpRight.Size = new System.Drawing.Size(32, 20);
-            this.tbpRight.TabIndex = 10;
-            // 
-            // tbpBottom
-            // 
-            this.tbpBottom.Location = new System.Drawing.Point(256, 355);
-            this.tbpBottom.Name = "tbpBottom";
-            this.tbpBottom.Size = new System.Drawing.Size(32, 20);
-            this.tbpBottom.TabIndex = 11;
-            // 
-            // btRefresh
-            // 
-            this.btRefresh.BackColor = System.Drawing.Color.AliceBlue;
-            this.btRefresh.Location = new System.Drawing.Point(85, 139);
-            this.btRefresh.Name = "btRefresh";
-            this.btRefresh.Size = new System.Drawing.Size(223, 32);
-            this.btRefresh.TabIndex = 3;
-            this.btRefresh.Text = "Refresh";
-            this.btRefresh.UseVisualStyleBackColor = false;
-            this.btRefresh.Click += new System.EventHandler(this.btRefresh_Click);
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(285, 398);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 33);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Do";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Form1
             // 
@@ -426,6 +452,8 @@
         private System.Windows.Forms.TextBox tbpLeft;
         private System.Windows.Forms.TextBox tbpTop;
         private System.Windows.Forms.Button btRefresh;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
