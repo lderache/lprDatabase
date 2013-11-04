@@ -100,13 +100,16 @@ namespace LprDatabase
             double plRatio = (double)db.plate.Width / db.plate.Height;
             lbRatio.Text = (plRatio).ToString();
 
-            if (plRatio < 2 || plRatio > 8)
+            if (cbPlateShow.Checked)
             {
-                drawPlateRectangle(new Bgr(0, 0, 255));
-            }
-            else
-            {
-                drawPlateRectangle(new Bgr(0, 255, 0));
+                if (plRatio < 2 || plRatio > 8)
+                {
+                    drawPlateRectangle(new Bgr(0, 0, 255));
+                }
+                else
+                {
+                    drawPlateRectangle(new Bgr(0, 255, 0));
+                }
             }
 
             lbHeight.Text = db.plate.Height.ToString();

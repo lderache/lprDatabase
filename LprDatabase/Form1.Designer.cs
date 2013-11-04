@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tbpBottom = new System.Windows.Forms.TextBox();
             this.tbpRight = new System.Windows.Forms.TextBox();
             this.tbpLeft = new System.Windows.Forms.TextBox();
@@ -58,8 +60,7 @@
             this.lbNav = new System.Windows.Forms.Label();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.cbPlateShow = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -119,6 +120,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.cbPlateShow);
             this.splitContainer2.Panel2.Controls.Add(this.btRefresh);
             this.splitContainer2.Panel2.Controls.Add(this.lbMouse);
             this.splitContainer2.Panel2.Controls.Add(this.btNext);
@@ -127,6 +129,28 @@
             this.splitContainer2.Size = new System.Drawing.Size(411, 628);
             this.splitContainer2.SplitterDistance = 448;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(285, 398);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 33);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Do";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(285, 355);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 33);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Up";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tbpBottom
             // 
@@ -373,27 +397,17 @@
             this.imageBox1.TabStop = false;
             this.imageBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageBox1_MouseMove);
             // 
-            // label1
+            // cbPlateShow
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(285, 355);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 33);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Up";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(285, 398);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 33);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Do";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.cbPlateShow.AutoSize = true;
+            this.cbPlateShow.Checked = true;
+            this.cbPlateShow.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbPlateShow.Location = new System.Drawing.Point(330, 148);
+            this.cbPlateShow.Name = "cbPlateShow";
+            this.cbPlateShow.Size = new System.Drawing.Size(50, 17);
+            this.cbPlateShow.TabIndex = 4;
+            this.cbPlateShow.Text = "Plate";
+            this.cbPlateShow.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -454,6 +468,7 @@
         private System.Windows.Forms.Button btRefresh;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbPlateShow;
     }
 }
 
